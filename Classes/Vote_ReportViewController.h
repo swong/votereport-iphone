@@ -17,6 +17,7 @@
 	IBOutlet UIButton *infoButton;
 	IBOutlet UIImageView *splash;
 	IBOutlet UIViewController *vote_ReportDetailViewController;
+	IBOutlet UIViewController *zipCodeViewController;
 	IBOutlet UIView *creditView;
 	IBOutlet UITextView *creditTextView;
 	Reporter *reporter;

@@ -79,7 +79,8 @@
 }
 
 - (IBAction) doPushReportDetailView{
-	[self presentModalViewController:vote_ReportDetailViewController animated:YES];
+	//[self presentModalViewController:vote_ReportDetailViewController animated:YES];
+	[self presentModalViewController:zipCodeViewController animated:YES];
 }
 
 - (IBAction)flipCredit{

@@ -8,9 +8,8 @@
 		<string key="IBDocument.HIToolboxVersion">352.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="55"/>
-			<integer value="8"/>
 			<integer value="85"/>
+			<integer value="109"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -25,7 +24,7 @@
 				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
 			</object>
 			<object class="IBUIView" id="259121778">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -156,7 +155,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{320, 460}</string>
-				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MC4zNzg3MDQyOCAwLjU1MjgxMDM3IDAuNzUwMDExNDQAA</bytes>
@@ -399,6 +397,73 @@ YW5uYSBaYW5kdA</string>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 			</object>
+			<object class="IBUIViewController" id="394208642">
+				<object class="IBUIView" key="IBUIView" id="221583001">
+					<reference key="NSNextResponder"/>
+					<int key="NSvFlags">274</int>
+					<object class="NSMutableArray" key="NSSubviews">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="IBUITextField" id="803543669">
+							<reference key="NSNextResponder" ref="221583001"/>
+							<int key="NSvFlags">292</int>
+							<string key="NSFrame">{{89, 73}, {149, 31}}</string>
+							<reference key="NSSuperview" ref="221583001"/>
+							<bool key="IBUIOpaque">NO</bool>
+							<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+							<int key="IBUIContentVerticalAlignment">0</int>
+							<string key="IBUIText"/>
+							<int key="IBUIBorderStyle">3</int>
+							<string key="IBUIPlaceholder">zip code</string>
+							<object class="NSColor" key="IBUITextColor">
+								<int key="NSColorSpace">3</int>
+								<bytes key="NSWhite">MAA</bytes>
+								<reference key="NSCustomColorSpace" ref="110435488"/>
+							</object>
+							<int key="IBUITextAlignment">1</int>
+							<bool key="IBUIClearsOnBeginEditing">YES</bool>
+							<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
+							<float key="IBUIMinimumFontSize">2.200000e+01</float>
+							<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+								<int key="IBUIAutocorrectionType">1</int>
+								<int key="IBUIKeyboardType">4</int>
+							</object>
+						</object>
+						<object class="IBUILabel" id="835624481">
+							<reference key="NSNextResponder" ref="221583001"/>
+							<int key="NSvFlags">292</int>
+							<string key="NSFrame">{{129, 31}, {69, 21}}</string>
+							<reference key="NSSuperview" ref="221583001"/>
+							<bool key="IBUIOpaque">NO</bool>
+							<bool key="IBUIClipsSubviews">YES</bool>
+							<bool key="IBUIUserInteractionEnabled">NO</bool>
+							<string key="IBUIText">Zip Code</string>
+							<object class="NSColor" key="IBUITextColor">
+								<int key="NSColorSpace">1</int>
+								<bytes key="NSRGB">MSAxIDEAA</bytes>
+								<object class="NSColorSpace" key="NSCustomColorSpace">
+									<int key="NSID">1</int>
+								</object>
+							</object>
+							<nil key="IBUIHighlightedColor"/>
+							<int key="IBUIBaselineAdjustment">1</int>
+							<float key="IBUIMinimumFontSize">1.000000e+01</float>
+						</object>
+					</object>
+					<string key="NSFrameSize">{320, 460}</string>
+					<reference key="NSSuperview"/>
+					<object class="NSColor" key="IBUIBackgroundColor">
+						<int key="NSColorSpace">6</int>
+						<string key="NSCatalogName">System</string>
+						<string key="NSColorName">controlDarkShadowColor</string>
+						<object class="NSColor" key="NSColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MAA</bytes>
+						</object>
+					</object>
+					<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+				</object>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<object class="NSMutableArray" key="connectionRecords">
@@ -599,6 +664,31 @@ YW5uYSBaYW5kdA</string>
 					</object>
 					<int key="connectionID">99</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">zipTextField</string>
+						<reference key="source" ref="394208642"/>
+						<reference key="destination" ref="803543669"/>
+					</object>
+					<int key="connectionID">112</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">zipCodeViewController</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="394208642"/>
+					</object>
+					<int key="connectionID">114</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">doChange</string>
+						<reference key="source" ref="803543669"/>
+						<reference key="destination" ref="394208642"/>
+						<int key="IBEventType">18</int>
+					</object>
+					<int key="connectionID">115</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -794,6 +884,36 @@ YW5uYSBaYW5kdA</string>
 						<reference key="object" ref="812029520"/>
 						<reference key="parent" ref="892816861"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">108</int>
+						<reference key="object" ref="394208642"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="221583001"/>
+						</object>
+						<reference key="parent" ref="360949347"/>
+						<string key="objectName">ZipCodeViewController</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">109</int>
+						<reference key="object" ref="221583001"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="835624481"/>
+							<reference ref="803543669"/>
+						</object>
+						<reference key="parent" ref="394208642"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">110</int>
+						<reference key="object" ref="803543669"/>
+						<reference key="parent" ref="221583001"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">111</int>
+						<reference key="object" ref="835624481"/>
+						<reference key="parent" ref="221583001"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -802,6 +922,12 @@ YW5uYSBaYW5kdA</string>
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>-1.CustomClassName</string>
 					<string>-2.CustomClassName</string>
+					<string>108.CustomClassName</string>
+					<string>108.IBEditorWindowLastContentRect</string>
+					<string>108.IBPluginDependency</string>
+					<string>109.IBPluginDependency</string>
+					<string>110.IBPluginDependency</string>
+					<string>111.IBPluginDependency</string>
 					<string>18.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
 					<string>20.IBPluginDependency</string>
@@ -840,6 +966,12 @@ YW5uYSBaYW5kdA</string>
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>Vote_ReportViewController</string>
 					<string>UIResponder</string>
+					<string>ZipCodeViewController</string>
+					<string>{{142, 111}, {320, 480}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -867,7 +999,7 @@ YW5uYSBaYW5kdA</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>{{273, 191}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{292, 170}, {320, 480}}</string>
+					<string>{{338, 151}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -895,7 +1027,7 @@ YW5uYSBaYW5kdA</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">99</int>
+			<int key="maxID">115</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -978,6 +1110,7 @@ YW5uYSBaYW5kdA</string>
 							<string>splash</string>
 							<string>textField</string>
 							<string>vote_ReportDetailViewController</string>
+							<string>zipCodeViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -990,11 +1123,36 @@ YW5uYSBaYW5kdA</string>
 							<string>UIImageView</string>
 							<string>UITextField</string>
 							<string>UIViewController</string>
+							<string>UIViewController</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">Classes/Vote_ReportViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ZipCodeViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">doChange</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">zipTextField</string>
+						<string key="NS.object.0">UITextField</string>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">ZipCodeViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ZipCodeViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBUserSource</string>
+						<string key="minorKey"/>
 					</object>
 				</object>
 			</object>

@@ -24,6 +24,7 @@
 		2899E5220DE3E06400AC0155 /* Vote_ReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* Vote_ReportViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* Vote_ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* Vote_ReportViewController.m */; };
+		51827F170EB818C200C514EC /* ZipCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51827F160EB818C200C514EC /* ZipCodeViewController.m */; };
 		51DE48F90EB59EDE007C8A81 /* slider_ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DE48F80EB59EDE007C8A81 /* slider_ball.png */; };
 		51DE48FB0EB59EE7007C8A81 /* redslide.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DE48FA0EB59EE7007C8A81 /* redslide.png */; };
 		51DE48FD0EB59EF0007C8A81 /* greenslide.png in Resources */ = {isa = PBXBuildFile; fileRef = 51DE48FC0EB59EF0007C8A81 /* greenslide.png */; };
@@ -66,6 +67,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Vote_Report_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vote_Report_Prefix.pch; sourceTree = "<group>"; };
 		515639D70EB56333008654D0 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		51827F150EB818C200C514EC /* ZipCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipCodeViewController.h; path = ../ZipCodeViewController.h; sourceTree = "<group>"; };
+		51827F160EB818C200C514EC /* ZipCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZipCodeViewController.m; path = ../ZipCodeViewController.m; sourceTree = "<group>"; };
 		51DE48F80EB59EDE007C8A81 /* slider_ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slider_ball.png; sourceTree = "<group>"; };
 		51DE48FA0EB59EE7007C8A81 /* redslide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redslide.png; sourceTree = "<group>"; };
 		51DE48FC0EB59EF0007C8A81 /* greenslide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenslide.png; sourceTree = "<group>"; };
@@ -110,6 +113,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				51827F150EB818C200C514EC /* ZipCodeViewController.h */,
+				51827F160EB818C200C514EC /* ZipCodeViewController.m */,
 				51F4EF900EB581A000326D9C /* Vote_ReportDetailViewController.h */,
 				51F4EF910EB581A000326D9C /* Vote_ReportDetailViewController.m */,
 				058FD7DA0EB21C16000E2324 /* HTTPManager.h */,
@@ -290,6 +295,7 @@
 				51F4F00A0EB58CF200326D9C /* CellPicker.m in Sources */,
 				51DE49010EB59F86007C8A81 /* CellSlider.m in Sources */,
 				51DE4A320EB5AE81007C8A81 /* DisplayCell2.m in Sources */,
+				51827F170EB818C200C514EC /* ZipCodeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
