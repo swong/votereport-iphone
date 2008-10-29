@@ -1,9 +1,9 @@
 /*
+File: AudioPlayer.h
+Abstract: The playback class for SpeakHere, which in turn employs 
+a playback audio queue object from Audio Queue Services.
 
-File: Constants.h
-Abstract: Common constants across source files (screen coordinate consts, etc.)
-
-Version: 1.7
+Version: 1.0
 
 Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple Inc.
 ("Apple") in consideration of your agreement to the following terms, and your
@@ -45,51 +45,44 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 */
 
-// these are the various screen placement constants used across all the UIViewControllers
- 
-// padding for margins
-#define kLeftMargin				20.0
-#define kTopMargin				20.0
-#define kRightMargin			20.0
-#define kBottomMargin			20.0
-#define kTweenMargin			10.0
 
-// control dimensions
-#define kStdButtonWidth			106.0
-#define kStdButtonHeight		40.0
-#define kSegmentedControlHeight 40.0
-#define kPageControlHeight		20.0
-#define kPageControlWidth		160.0
-#define kSliderHeight			7.0
-#define kSwitchButtonWidth		94.0
-#define kSwitchButtonHeight		27.0
-#define kTextFieldHeight		30.0
-#define kSearchBarHeight		40.0
-#define kLabelHeight			20.0
-#define kProgressIndicatorSize	40.0
-#define kToolbarHeight			40.0
-#define kUIProgressBarWidth		160.0
-#define kUIProgressBarHeight	24.0
+#import <UIKit/UIKit.h>
 
-// specific font metrics used in our text fields and text views
-#define kFontName				@"Arial"
-#define kTextFieldFontSize		18.0
-#define kTextViewFontSize		18.0
+#define kSecondsPerBuffer	0.5
 
-// UITableView row heights
-#define kUIRowHeight			50.0
-#define kUIRowLabelHeight		22.0
+@interface AudioPlayer : AudioQueueObject {
 
-// table view cell content offsets
-#define kCellLeftOffset			8.0
-#define kCellTopOffset			12.0
+	AudioQueueBufferRef				buffers[kNumberAudioDataBuffers];	// the audio queue buffers for the audio queue
 
-#define kTextFieldWidth							100.0	// initial width, but the table cell will dictact the actual width
-#define kSourceCell_ID		@"cell_source"
-#define kDisplayCell_ID		@"cell_display"
-#define kCellSwitch_ID		@"cell_switch"
+	UInt32							bufferByteSize;						// the number of bytes to use in each audio queue buffer
+	UInt32							numPacketsToRead;					// the number of audio data packets to read into each audio queue buffer
 
-#define kUITextViewCellRowHeight 150.0
-#define kUIAudioCellRowHeight 90.0
-#define kUISliderCellRowHeight	 60.0
+	AudioStreamPacketDescription	*packetDescriptions;
 
+	Float32							gain;								// the gain (relative audio level) for the playback audio queue
+
+
+	BOOL							donePlayingFile;
+	BOOL							audioPlayerShouldStopImmediately;
+}
+
+@property (readwrite) UInt32						numPacketsToRead;
+@property (readwrite) AudioStreamPacketDescription	*packetDescriptions;
+@property (readwrite) BOOL							donePlayingFile;
+@property (readwrite) BOOL							audioPlayerShouldStopImmediately;
+@property (readwrite) UInt32						bufferByteSize;
+@property (readwrite) Float32						gain;			// the gain (relative audio level) for the playback audio queue
+
+- (id) initWithURL: (CFURLRef) fileURL;
+- (void) copyMagicCookieToQueue: (AudioQueueRef) queue fromFile: (AudioFileID) playbackFileID;
+- (void) calculateSizesFor: (Float64) seconds;
+- (void) openPlaybackFile: (CFURLRef) fileURL;
+- (void) setupPlaybackAudioQueueObject;
+- (void) setupAudioQueueBuffers;
+
+- (void) play;
+- (void) stop;
+- (void) pause;
+- (void) resume;
+
+@end

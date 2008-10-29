@@ -1,9 +1,8 @@
 /*
+File: AudioQueueObject.h
+Abstract: The superclass for the recording and playback classes.
 
-File: Constants.h
-Abstract: Common constants across source files (screen coordinate consts, etc.)
-
-Version: 1.7
+Version: 1.0
 
 Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple Inc.
 ("Apple") in consideration of your agreement to the following terms, and your
@@ -45,51 +44,36 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 */
 
-// these are the various screen placement constants used across all the UIViewControllers
- 
-// padding for margins
-#define kLeftMargin				20.0
-#define kTopMargin				20.0
-#define kRightMargin			20.0
-#define kBottomMargin			20.0
-#define kTweenMargin			10.0
 
-// control dimensions
-#define kStdButtonWidth			106.0
-#define kStdButtonHeight		40.0
-#define kSegmentedControlHeight 40.0
-#define kPageControlHeight		20.0
-#define kPageControlWidth		160.0
-#define kSliderHeight			7.0
-#define kSwitchButtonWidth		94.0
-#define kSwitchButtonHeight		27.0
-#define kTextFieldHeight		30.0
-#define kSearchBarHeight		40.0
-#define kLabelHeight			20.0
-#define kProgressIndicatorSize	40.0
-#define kToolbarHeight			40.0
-#define kUIProgressBarWidth		160.0
-#define kUIProgressBarHeight	24.0
+#import <UIKit/UIKit.h>
+#include <AudioToolbox/AudioToolbox.h>
 
-// specific font metrics used in our text fields and text views
-#define kFontName				@"Arial"
-#define kTextFieldFontSize		18.0
-#define kTextViewFontSize		18.0
+#define kNumberAudioDataBuffers	3
 
-// UITableView row heights
-#define kUIRowHeight			50.0
-#define kUIRowLabelHeight		22.0
+@interface AudioQueueObject : NSObject {
 
-// table view cell content offsets
-#define kCellLeftOffset			8.0
-#define kCellTopOffset			12.0
+	AudioQueueRef					queueObject;					// the audio queue object being used for playback
+	AudioFileID						audioFileID;					// the identifier for the audio file to play
+	CFURLRef						audioFileURL;
+	AudioStreamBasicDescription		audioFormat;
+	AudioQueueLevelMeterState		*audioLevels;
+	SInt64							startingPacketNumber;			// the current packet number in the playback file
+	id								notificationDelegate;
+}
 
-#define kTextFieldWidth							100.0	// initial width, but the table cell will dictact the actual width
-#define kSourceCell_ID		@"cell_source"
-#define kDisplayCell_ID		@"cell_display"
-#define kCellSwitch_ID		@"cell_switch"
+@property (readwrite)			AudioQueueRef				queueObject;
+@property (readwrite)			AudioFileID					audioFileID;
+@property (readwrite)			CFURLRef					audioFileURL;
+@property (readwrite)			AudioStreamBasicDescription	audioFormat;
+@property (readwrite)			AudioQueueLevelMeterState	*audioLevels;
+@property (readwrite)			SInt64						startingPacketNumber;
+@property (nonatomic, retain)	id							notificationDelegate;
 
-#define kUITextViewCellRowHeight 150.0
-#define kUIAudioCellRowHeight 90.0
-#define kUISliderCellRowHeight	 60.0
 
+- (void) incrementStartingPacketNumberBy:  (UInt32) inNumPackets;
+- (void) setNotificationDelegate: (id) inDelegate;
+- (void) enableLevelMetering;
+- (void) getAudioLevels: (Float32 *) levels peakLevels: (Float32 *) peakLevels;
+- (BOOL) isRunning;
+
+@end

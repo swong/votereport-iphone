@@ -25,7 +25,9 @@
 
 // this gets called by the Reporter if access to location is denied or fails
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:2067773333"]];
+	NSLog(@"User Clicked:%d",buttonIndex);
+	if (buttonIndex==0) [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:2067773333"]];
+	else if (buttonIndex==1) [viewController presentModalViewController:zipCodeViewController animated:YES];
 }
 
 - (void)dealloc {

@@ -13,6 +13,8 @@
 @interface Vote_ReportAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
     Vote_ReportViewController *viewController;
+	IBOutlet UIViewController *zipCodeViewController;
+	
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;

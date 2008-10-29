@@ -17,17 +17,15 @@
 	IBOutlet UIButton *infoButton;
 	IBOutlet UIImageView *splash;
 	IBOutlet UIViewController *vote_ReportDetailViewController;
-	IBOutlet UIViewController *zipCodeViewController;
 	IBOutlet UIView *creditView;
 	IBOutlet UITextView *creditTextView;
 	Reporter *reporter;
 }
 
-//- (IBAction)setConditions:(id)sender;
-
 - (IBAction)doPushReportDetailView;
+- (void) sendReportWith:(NSMutableDictionary *)params;
+- (void) setZipCode:(NSString *)zipcode;
 - (IBAction)flipCredit;
-
 
 @end
 

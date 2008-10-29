@@ -11,32 +11,21 @@
 
 @implementation Vote_ReportViewController
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-	printf("did begin editing textfield\n");
+- (id)initWithCoder:(NSCoder*)coder 
+{
+	if (self = [super initWithCoder:coder]) {
+		reporter = [[Reporter alloc] init];
+		[reporter addObserver:self forKeyPath:@"locationName" options:NSKeyValueObservingOptionNew context:NULL];
+	}
+	return self;
 }
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-	printf("should end\n");
-	return YES;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
-	printf("should return\n");
-	[theTextField resignFirstResponder];
-	return YES;
-}
-
+		
 - (void)viewDidLoad {
-	printf("view did load\n");
-	reporter = [[Reporter alloc] init];
-
-	// Set up view
-	[spinner startAnimating];
-	[reporter addObserver:self forKeyPath:@"locationName" options:NSKeyValueObservingOptionNew context:NULL];
 	UIImage *buttonBackground = [UIImage imageNamed:@"whiteButton.png"];
 	UIImage *newImage = [buttonBackground stretchableImageWithLeftCapWidth:12.0 topCapHeight:0.0];
 	[button setBackgroundImage:newImage forState:UIControlStateNormal];
-
+	
 	buttonBackground = [UIImage imageNamed:@"blueButton.png"];
 	newImage = [buttonBackground stretchableImageWithLeftCapWidth:12.0 topCapHeight:0.0];
 	[button setBackgroundImage:newImage forState:UIControlStateSelected];
@@ -50,9 +39,9 @@
 	textField.delegate = self;
 	
 	//Get the credit text size right.
-	creditTextView.font = [UIFont fontWithName:@"Arial" size:16];
-
+	creditTextView.font = [UIFont fontWithName:@"Arial" size:15];	
 }
+
 
 // We must be getting notified of a location name update - it's all we Observe for
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -61,6 +50,7 @@
                        context:(void *)context {
 	
 	printf("observed locationName update\n");
+
 	if (reporter.locationName) {
 		[spinner stopAnimating];
 		button.hidden = NO;
@@ -78,9 +68,45 @@
 	}
 }
 
+
+// Open KML link for nearby reports
+-(void)openNearbyReports {
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:
+					[NSString stringWithFormat: VOTEREPORT_REPORTS_KML_URL, reporter.location.coordinate.latitude, reporter.location.coordinate.longitude]]];
+}
+
+-(void)reportSubmitted {
+	if (!reporter.successful) {
+		locationName.text = @"Report Submission Failed";
+		[button setTitle:@"Try Again" forState:UIControlStateNormal|UIControlStateNormal];	
+		[button setTitle:@"Try Again" forState:UIControlStateNormal|UIControlStateSelected];	
+	}
+	else
+	{
+		locationName.text = @"Report Sent Successfully!";
+		[button setTitle:@"See Other Reports Nearby" forState:UIControlStateNormal];
+		[button setTitle:@"See Other Reports Nearby" forState:UIControlStateSelected];
+		[button removeTarget:self action:@selector(doPushReportDetailView) forControlEvents:UIControlEventTouchUpInside];
+		[button addTarget:self action:@selector(openNearbyReports) forControlEvents:UIControlEventTouchUpInside];
+	}	
+	button.enabled = YES;
+}
+
+-(void) sendReportWith:(NSMutableDictionary *)params {
+	reporter.target = self;
+	reporter.targetSelector = @selector(reportSubmitted);
+	[button setTitle:@"Sending Report..." forState:UIControlStateDisabled];
+	button.enabled = NO;
+	printf("sending report...\n");
+	[reporter postReportWithParams:params];
+}
+
+-(void) setZipCode:(NSString *)zipcode{
+	locationName.text = zipcode;	
+}
+
 - (IBAction) doPushReportDetailView{
-	//[self presentModalViewController:vote_ReportDetailViewController animated:YES];
-	[self presentModalViewController:zipCodeViewController animated:YES];
+	[self presentModalViewController:vote_ReportDetailViewController animated:YES];
 }
 
 - (IBAction)flipCredit{
@@ -116,6 +142,7 @@
 
 
 - (void)dealloc {
+	[reporter dealloc];
     [super dealloc];
 }
 

@@ -1,9 +1,8 @@
 /*
+File: AudioQueueObject.m
+Abstract: The superclass for the recording and playback classes.
 
-File: Constants.h
-Abstract: Common constants across source files (screen coordinate consts, etc.)
-
-Version: 1.7
+Version: 1.0
 
 Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple Inc.
 ("Apple") in consideration of your agreement to the following terms, and your
@@ -45,51 +44,91 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 */
 
-// these are the various screen placement constants used across all the UIViewControllers
- 
-// padding for margins
-#define kLeftMargin				20.0
-#define kTopMargin				20.0
-#define kRightMargin			20.0
-#define kBottomMargin			20.0
-#define kTweenMargin			10.0
 
-// control dimensions
-#define kStdButtonWidth			106.0
-#define kStdButtonHeight		40.0
-#define kSegmentedControlHeight 40.0
-#define kPageControlHeight		20.0
-#define kPageControlWidth		160.0
-#define kSliderHeight			7.0
-#define kSwitchButtonWidth		94.0
-#define kSwitchButtonHeight		27.0
-#define kTextFieldHeight		30.0
-#define kSearchBarHeight		40.0
-#define kLabelHeight			20.0
-#define kProgressIndicatorSize	40.0
-#define kToolbarHeight			40.0
-#define kUIProgressBarWidth		160.0
-#define kUIProgressBarHeight	24.0
+#include <AudioToolbox/AudioToolbox.h>
+#import "AudioQueueObject.h"
 
-// specific font metrics used in our text fields and text views
-#define kFontName				@"Arial"
-#define kTextFieldFontSize		18.0
-#define kTextViewFontSize		18.0
 
-// UITableView row heights
-#define kUIRowHeight			50.0
-#define kUIRowLabelHeight		22.0
+@implementation AudioQueueObject
 
-// table view cell content offsets
-#define kCellLeftOffset			8.0
-#define kCellTopOffset			12.0
+@synthesize queueObject;
+@synthesize audioFileID;
+@synthesize audioFileURL;
+@synthesize audioFormat;
+@synthesize audioLevels;
+@synthesize startingPacketNumber;
+@synthesize notificationDelegate;
 
-#define kTextFieldWidth							100.0	// initial width, but the table cell will dictact the actual width
-#define kSourceCell_ID		@"cell_source"
-#define kDisplayCell_ID		@"cell_display"
-#define kCellSwitch_ID		@"cell_switch"
+- (void) incrementStartingPacketNumberBy: (UInt32) inNumPackets {
 
-#define kUITextViewCellRowHeight 150.0
-#define kUIAudioCellRowHeight 90.0
-#define kUISliderCellRowHeight	 60.0
+	startingPacketNumber += inNumPackets;
+}
 
+
+- (void) setNotificationDelegate: (id) inDelegate {
+
+    notificationDelegate = inDelegate;
+}
+
+- (BOOL) isRunning {
+
+	UInt32		isRunning;
+	UInt32		propertySize = sizeof (UInt32);
+	OSStatus	result;
+	
+	 result =	AudioQueueGetProperty (
+					queueObject,
+					kAudioQueueProperty_IsRunning,
+					&isRunning,
+					&propertySize
+				);
+
+	if (result != noErr) {
+		return false;
+	} else {
+		return isRunning;
+	}
+}
+
+
+// an audio queue object doesn't provide audio level information unless you 
+// enable it to do so
+- (void) enableLevelMetering {
+
+	// allocate the memory needed to store audio level information
+	self.audioLevels = (AudioQueueLevelMeterState *) calloc (sizeof (AudioQueueLevelMeterState), audioFormat.mChannelsPerFrame);
+
+	UInt32 trueValue = true;
+
+	AudioQueueSetProperty (
+		self.queueObject,
+		kAudioQueueProperty_EnableLevelMetering,
+		&trueValue,
+		sizeof (UInt32)
+	);
+}
+
+
+// gets audio levels from the audio queue object, to 
+// display using the bar graph in the application UI
+- (void) getAudioLevels: (Float32 *) levels peakLevels: (Float32 *) peakLevels {
+
+	UInt32 propertySize = audioFormat.mChannelsPerFrame * sizeof (AudioQueueLevelMeterState);
+	
+	AudioQueueGetProperty (
+		self.queueObject,
+		(AudioQueuePropertyID) kAudioQueueProperty_CurrentLevelMeter,
+		self.audioLevels,
+		&propertySize
+	);
+	
+	levels[0]		= self.audioLevels[0].mAveragePower;
+	peakLevels[0]	= self.audioLevels[0].mPeakPower;
+}
+
+- (void) dealloc {
+	
+	[super dealloc];
+}
+
+@end
